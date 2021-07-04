@@ -1,0 +1,126 @@
+.PsnGames{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    font-size: 14px;
+}
+.PsnItemContainer{
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+}
+
+.PsnItem{
+    box-sizing: border-box;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow .2s ease-in-out;
+    background-color: white;
+    /* float: left; */
+    padding-bottom: 10px;
+}
+.PsnTextInfo{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+}
+.PsnTitle{
+    min-height: 1.5em;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 0.5em;
+    margin-top: 0.5em;
+}
+.PsnIcon{
+    width: 100%;
+    min-height: 100px;
+    /* background-color: #ff8c83; */
+    border-radius: 5px 5px 0 0;
+    height:auto;
+}
+.PsnButtons{
+    width: 100%;
+    float: none;
+    font-weight: bold;
+    text-align: center;
+}
+.PsnProgressBG{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 0.5em;
+    background-color: rgba(182, 182, 182, 0.35);
+    margin-bottom: 5px;
+
+}
+.PsnProgress{
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 0.5em;
+    background-color: #d70022;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 5px 10px;
+    white-space:nowrap;
+}
+.PsnLastPlayTime{
+    display: inline-block;
+    border-radius: 0.5em;
+    box-sizing: border-box;
+    background-color: #ea8000;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    color: #fff;
+    font-weight: bold;
+
+
+}
+#btnMore{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em 2em;
+    color:#fff ;
+    font-weight: bold;
+    background-color: #0072ce;
+    transition: all .1s ease-in-out;
+    border-radius: 2em;
+    border: none;
+}
+#btnMore:hover{
+    background-color: #0063b4;
+}
+#btnMore:disabled{
+    background-color: #0072ce !important;
+    color: rgba(255, 255, 255, 0.5);
+}
+#btnMore:focus{
+    outline: none;
+    outline-offset: 0;
+}
+.PsnPlatform{
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 0.5em;
+    background-color: #2d64e6;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    word-break: break-all;
+}
+.textLoading{
+    display: inline-block;
+    width: 100%;
+    background:linear-gradient(90deg,white,rgba(136,136,136,0.2));
+    background-size: 200% 100%;
+    animation: gradientBG 1s cubic-bezier(.6,-0.28,.74,.05) infinite;
+}
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: -150% 0%;
+    }
+}
