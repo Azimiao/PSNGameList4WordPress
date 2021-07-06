@@ -5,13 +5,13 @@ read -p "enter version:" VERSION
 if [ ! -d "./Builds/PSN_GameList_4_WordPress/" ];then
   mkdir -p ./Builds/PSN_GameList_4_WordPress/
   else
-  echo "文件夹已经存在"
+  echo "ok"
 fi
 
 cd ./Builds/PSN_GameList_4_WordPress/
-
+echo "clean up dir"
 rm -rf *
-
+echo "copy file"
 cp -r ../../assets ./assets
 cp ../../PSNGameList.php ./PSNGameList.php
 cp ../../README.md ./README.md
@@ -21,4 +21,4 @@ cd ../
 
 zip -q -r "PSN_GameList_4_WordPress"${VERSION}.zip ./PSN_GameList_4_WordPress
 
-read -p "any key to quit" quitkey
+read -p "Finish~,any key to quit" quitkey

@@ -4,7 +4,7 @@
  * Plugin Name: PSNGameList
  * Plugin URI: https://www.azimiao.com
  * Description: 一个WP用的PSN游戏库列表
- * Version: 1.0.0b1
+ * Version: 1.0.1
  * Author: 野兔#梓喵出没
  * Author URI: https://www.azimiao.com
  */
@@ -12,7 +12,7 @@
 
 class Azimiao_PSN_List
 {
-    private $plugin_version = "v1.0.0b1";
+    private $plugin_version = "v1.0.1";
 
     /**==================Options=================== **/
 
@@ -30,6 +30,7 @@ class Azimiao_PSN_List
 
     private $ajax_fix = "ajax_fix";
 
+    private $auto_runjs = "auto_runjs";
     function __construct()
     {
         //创建菜单
@@ -58,9 +59,13 @@ class Azimiao_PSN_List
             $options[$this->list_padding] = 10;
             $options[$this->ajax_fix] = false;
             $options[$this->card_width] = 260;
+            $options[$this->auto_runjs] = true;
             update_option($this->optionName, $options);
         }
-
+        if(!isset($options[$this->auto_runjs])){
+            $options[$this->auto_runjs] = true;
+            update_option($this->optionName, $options);
+        }
         return $options;
     }
 
@@ -127,10 +132,7 @@ class Azimiao_PSN_List
                         加载更多
                     </button>
                 </div>
-        </div>
-        <script>
-            PsnGameListConfigInit('{$configUrl}');
-        </script>";
+        </div>" . (boolval($options[$this->auto_runjs]) ? "<script>PsnGameListConfigInit('{$configUrl}');</script>" : "");
 
     }
 
@@ -167,6 +169,7 @@ class Azimiao_PSN_List
                 $options[$this->list_padding] = intval($_POST[$this->list_padding] ?? 10);
                 $options[$this->ajax_fix] = boolval($_POST[$this->ajax_fix] ?? false);
                 $options[$this->card_width] = intval($_POST[$this->card_width] ?? 260);
+                $options[$this->auto_runjs] = boolval($_POST[$this->auto_runjs] ?? false);
                 if($options[$this->api_limit] <=0){
                     $options[$this->api_limit] = 4;
                 }
@@ -338,7 +341,20 @@ class Azimiao_PSN_List
                             </tr>
                             <tr>
                                 <td>说明</td>
-                                <td><label>全局资源注册将js与css注册至全局，适用于手动ajax调用的情况</td>
+                                <td><label>全局资源注册将js与css注册至全局，适用于兼容 Ajax 的情况</td>
+                            </tr>
+                            <br><br>
+                            <tr>
+                                <td>自动开始：</td>
+                                <td><label><input name="<?php echo $this->auto_runjs ?>" type="checkbox" <?php if (boolval($options[$this->auto_runjs])) echo "checked='checked'"; ?> /> 开启</label></td>
+                            </tr>
+                            <tr>
+                                <td>说明</td>
+                                <td><label>有的主题 Ajax 加载后不会执行其内的 js 方法，此时请取消勾选"自动开始"，然后在主题如下位置处执行初始化方法</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><img src="<?php echo plugins_url('assets/image/fix-ajax-callback.jpg', __FILE__) ?>" alt="" srcset=""> </td>
                             </tr>
                         </table>
                     </div>

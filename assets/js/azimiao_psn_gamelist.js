@@ -9,13 +9,13 @@ let PsnGameListConfigCache = {
     loadingImg:""
 }
 
-function PsnGameListConfigInit(configUrl){
+function PsnGameListConfigInit(wp_admin_ajax_url){
 
     PsnGameListConfigCache.nextOffset = 0;
     PsnGameListConfigCache.theCount = 0;
     PsnGameListConfigCache.emptyElements = new Array();
 
-    fetch(`${configUrl}?action=GetGameListShowConfig`).then(configRes=>{
+    fetch(`${wp_admin_ajax_url}?action=GetGameListShowConfig`).then(configRes=>{
         configRes.json().then(configJson=>{
             PsnGameListConfigCache.apibase = configJson.apibase;
             PsnGameListConfigCache.limit = configJson.limit;
@@ -30,6 +30,12 @@ function PsnGameListConfigInit(configUrl){
 }
 
 function GetTrophyTitles() {
+    if(document.getElementById("PsnItemContainer") == null) 
+    return;
+    if(PsnGameListConfigCache == null || PsnGameListConfigCache.apibase == null || PsnGameListConfigCache.apibase == ""){
+        alert("PSN 游戏库插件初始化参数错误，请确保调用了PsnGameListConfigInit");
+        return;
+    }
     let btnT = document.getElementById("btnMore");
     btnT.setAttribute("disabled", "disabled");
     btnT.innerText = "正在获取";
@@ -65,8 +71,7 @@ function GetTrophyTitles() {
                 }
             }).catch(e => {
                 console.error(e);
-                console.error(res);
-                throw e;
+                alert(e);
             });
         }).catch(e => {
             console.error(e);
