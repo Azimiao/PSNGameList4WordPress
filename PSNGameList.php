@@ -4,7 +4,7 @@
  * Plugin Name: PSNGameList
  * Plugin URI: https://www.azimiao.com
  * Description: 一个WP用的PSN游戏库列表
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: 野兔#梓喵出没
  * Author URI: https://www.azimiao.com
  */
@@ -12,7 +12,7 @@
 
 class Azimiao_PSN_List
 {
-    private $plugin_version = "v1.0.1";
+    private $plugin_version = "v1.0.2";
 
     /**==================Options=================== **/
 
@@ -164,7 +164,16 @@ class Azimiao_PSN_List
         if ($NonceFlagTest) {
             //check Successful,do save and exec
             if($checkFlag1){
-                $options[$this->api_base] = strval($_POST[$this->api_base] ?? admin_url('admin-ajax.php'));
+                if(isset($_POST[$this->api_base])){
+                    if("" == strval($_POST[$this->api_base])){
+                        $options[$this->api_base] = admin_url('admin-ajax.php');
+                    }else{
+                        $options[$this->api_base] =  strval($_POST[$this->api_base]);
+                    }
+                }else{
+                    $options[$this->api_base] = admin_url('admin-ajax.php');
+                }
+                // $options[$this->api_base] = strval($_POST[$this->api_base] ??  admin_url('admin-ajax.php'));
                 $options[$this->api_limit] = intval($_POST[$this->api_limit] ?? 4);
                 $options[$this->list_padding] = intval($_POST[$this->list_padding] ?? 10);
                 $options[$this->ajax_fix] = boolval($_POST[$this->ajax_fix] ?? false);
