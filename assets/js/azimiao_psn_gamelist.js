@@ -102,10 +102,17 @@ function OnTrophyResult(jsonObj) {
 
             let imgE = emptyEle.querySelector(".PsnIcon");
             imgE.removeAttribute("style");
+            
+            if(element.trophyTitlePlatform.includes("PS5")){
+                imgE.style.height =  "var(--psnCardWidth)";
+                console.log("Ps5! Go Go Go");
+            }else{
+                imgE.style.height = "cal(var(--psnCardWidth) * (176 / 320))"
+            }
             imgE.addEventListener("load", function () {
                 loadImgFinish(this);
             }.bind(imgE));
-            // imgE.onload = "loadImgFinish(this)";
+
             imgE.src = element.trophyTitleIconUrl;
 
             let titleE = emptyEle.querySelector(".PsnTitle");
@@ -138,7 +145,9 @@ function OnTrophyResult(jsonObj) {
             }
         }
     }
-    ReflushGrid();
+    setInterval(()=>{
+        ReflushGrid();
+    },100);
 
     this.ReflushNextBtn();
 
@@ -152,9 +161,9 @@ function OnTrophyResult(jsonObj) {
 function loadImgFinish(a) {
     a.style.backgroundColor = "#333645";
     PsnGameListConfigCache.theCount--;
-    if (PsnGameListConfigCache.theCount >= 0) {
-        ReflushGrid();
-    }
+    // if (PsnGameListConfigCache.theCount >= 0) {
+    //     ReflushGrid();
+    // }
     if (PsnGameListConfigCache.theCount <= 0) {
         document.getElementById("btnMore").scrollIntoView({
             behavior: "smooth",

@@ -122,6 +122,8 @@ class Azimiao_PSN_List
             .PsnItem{
                 width:{$cardWidth}px
             }
+            :root{
+                --psnCardWidth:{$cardWidth}px
         </style>
         <div class='PsnGames' id='azimiao_psngames'>
                 <div id='PsnItemContainer' class='PsnItemContainer'>
