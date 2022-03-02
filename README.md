@@ -3,7 +3,7 @@ WordPress PSN 游戏列表卡片式展示插件。
 # 前置插件 Require
 [PSNGameListAPI4WordPress](https://github.com/Azimiao/PSNGameListAPI4WordPress)
 # Demo
-[http://test.azimiao.com/?p=16](http://test.azimiao.com/?p=16)
+~~[http://test.azimiao.com/?p=16](http://test.azimiao.com/?p=16)~~
 # 功能
 本插件注册了一个短代码`azimiao_psn_gamelist`，可输出卡片式 PSN 游戏列表。
 
